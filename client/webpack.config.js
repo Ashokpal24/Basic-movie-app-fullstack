@@ -17,8 +17,8 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/, // Match .css files
-        use: ["style-loader", "css-loader"], // Use loaders to handle CSS files
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },

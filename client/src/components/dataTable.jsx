@@ -66,7 +66,7 @@ const DataTable = ({ data }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.
+                        {data.length > 0 && data.
                             slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).
                             map((row) => {
                                 const date = new Date(row.release_date)

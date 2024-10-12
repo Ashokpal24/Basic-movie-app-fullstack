@@ -1,30 +1,38 @@
-import dayjs from 'dayjs';
 import * as React from 'react'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import "./style.css"
+import { useState } from 'react';
+import { Typography } from '@mui/material';
 
-const currentYear = dayjs();
+const yearOptions = [];
+const currentYear = new Date().getFullYear();
 
-export default function YearPicker() {
+for (let year = currentYear; year >= 1900; year--) {
+    yearOptions.push(year);
+}
+
+export default function YearPicker({ setYear }) {
+
+    const [selectedYear, setSelectedYear] = useState(currentYear);
+
+    const handleYearChange = (event) => {
+        setSelectedYear(event.target.value);
+        setYear(event.target.value)
+        // console.log(`Selected year: ${event.target.value}`);
+    };
+
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-                sx={{
-                    '.MuiPickersYear-yearButton': {
-                        borderRadius: "0px"
-                    },
-                    minWidth: 250
-                }}
-
-                label="Years"
-                maxDate={currentYear}
-                openTo="year"
-                views={['year']}
-                yearsOrder="desc"
-                value={currentYear}
-                onChange={(value) => console.log(value)}
-            />
-        </LocalizationProvider>
+        <div class="year-selector">
+            <Typography component={'p'}>Select Year</Typography>
+            <select id="year" name="year" value={selectedYear} onChange={handleYearChange}>
+                <option value="" disabled>
+                    -- Choose Year --
+                </option>
+                {yearOptions.map((year) => (
+                    <option key={year} value={year}>
+                        {year}
+                    </option>
+                ))}
+            </select>
+        </div >
     );
 }
