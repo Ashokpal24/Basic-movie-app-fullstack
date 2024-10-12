@@ -1,0 +1,9 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "nodemon index.js",
+      "insert-movies": "nodemon server/create_dummy.js"
+    }
+  }
+  
