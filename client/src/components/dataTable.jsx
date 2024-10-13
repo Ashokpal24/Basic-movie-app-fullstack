@@ -36,7 +36,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         border: 0,
     }
 }))
-const DataTable = ({ data }) => {
+
+
+const DataTable = ({ data,setData }) => {
     const [movieData, setMovieData] = useState(movieData)
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(2)
@@ -52,7 +54,7 @@ const DataTable = ({ data }) => {
     // Movie Name | Release Date | Studio Name | Director Name | Collection
     return (
         <Paper sx={{ width: '70%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: "279px", scrollbarGutter: 'stable' }}>
+            <TableContainer sx={{ maxHeight: "279px", scrollbarGutter: "stable" }}>
                 <Table stickyHeader aria-label="Movie Data" >
                     <TableHead>
                         <TableRow>

@@ -1,36 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from './components/searchBar';
 import DataTable from './components/dataTable';
-import axios from 'axios';
-import { getMovieURL, getMoviesByYearURL } from './urls';
-import { Box, Typography } from '@mui/material';
 import YearPicker from './components/yearPicker';
+import PopupFrom from './components/popupForm';
+import { handleGetDate, handleSetYear } from './utils/CRUD';
+
+import { Box, Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import { Add } from '@mui/icons-material';
+
 
 const App = () => {
     const [data, setData] = useState([])
+    const [open, setOpen] = useState(open)
+
     useEffect(() => {
-        handleGetDate()
+        handleGetDate({ setData })
     }, [])
 
-    const handleGetDate = async () => {
-        axios.get(getMovieURL).
-            then(data => {
-                setData(data.data)
-                // console.log(data)
-            }).
-            catch(err => console.log(err))
-    }
-    const handleSetYear = async (year) => {
-        await axios.get(getMoviesByYearURL + year).
-            then(data => {
-                setData(data.data)
-                // console.log(data)
-            }).
-            catch(err => console.log(err))
+    const handleSetYearIntr = ({ year }) => {
+        console.log(year)
+        handleSetYear({ year, setData })
     }
     return (
         <Box sx={{
-            height: "90vh",
+            height: "95vh",
             width: "100%",
             display: 'flex',
             flexDirection: "column",
@@ -55,16 +49,28 @@ const App = () => {
             </Box>
             <Box
                 sx={{
-                    width: "100vw",
+                    width: "70%",
                     display: 'flex',
                     flexDirection: 'row',
-                    justifyContent: 'space-around',
+                    justifyContent: 'flex-start',
                     alignItems: 'center',
                     marginBottom: "2rem",
                 }}>
-                <YearPicker setYear={handleSetYear} />
+                <YearPicker handleSetYearIntr={handleSetYearIntr} />
             </Box>
-            <DataTable data={data} />
+            <Box
+                sx={{
+                    width: "70%",
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    marginBottom: "2rem",
+                }}>
+                <Button variant='contained' color="primary" onClick={() => setOpen(true)}><Add /> Add Movie</Button>
+                <PopupFrom open={open} setOpen={setOpen} />
+            </Box>
+            <DataTable data={data} setData={setData} />
         </Box >
     );
 };
