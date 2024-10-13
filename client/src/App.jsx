@@ -12,7 +12,9 @@ import { Add } from '@mui/icons-material';
 
 const App = () => {
     const [data, setData] = useState([])
-    const [open, setOpen] = useState(open)
+    const [open, setOpen] = useState(false)
+    const [selected, setSelected] = useState(undefined)
+    const [isAdd, setIsAdd] = useState(true)
 
     useEffect(() => {
         handleGetDate({ setData })
@@ -67,10 +69,28 @@ const App = () => {
                     alignItems: 'center',
                     marginBottom: "2rem",
                 }}>
-                <Button variant='contained' color="primary" onClick={() => setOpen(true)}><Add /> Add Movie</Button>
-                <PopupFrom open={open} setOpen={setOpen} />
+                <Button
+                    variant='contained'
+                    color="primary" onClick={() => {
+                        setSelected(undefined)
+                        setIsAdd(true)
+                        setOpen(true)
+                    }}><Add /> Add Movie</Button>
+                <PopupFrom
+                    open={open}
+                    setOpen={setOpen}
+                    setData={setData}
+                    isAdd={isAdd}
+                    data={selected}
+                />
             </Box>
-            <DataTable data={data} setData={setData} />
+            <DataTable
+                data={data}
+                setOpen={setOpen}
+                setData={setData}
+                setSelected={setSelected}
+                setIsAdd={setIsAdd}
+            />
         </Box >
     );
 };

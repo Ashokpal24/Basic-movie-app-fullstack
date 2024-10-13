@@ -13,10 +13,10 @@ import {
     IconButton
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import { useState } from 'react';
-
-
-
+import { useState, useEffect } from 'react';
+import dateFormatter from '../utils/dateFormatter';
+import PopupFrom from './popupForm';
+import { handleDelete } from '../utils/CRUD';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -38,8 +38,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }))
 
 
-const DataTable = ({ data,setData }) => {
-    const [movieData, setMovieData] = useState(movieData)
+const DataTable = ({ data, setOpen, setData, setSelected, setIsAdd }) => {
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(2)
 
@@ -51,6 +50,8 @@ const DataTable = ({ data,setData }) => {
         setRowsPerPage(event.target.value);
         setPage(0);
     };
+
+
     // Movie Name | Release Date | Studio Name | Director Name | Collection
     return (
         <Paper sx={{ width: '70%', overflow: 'hidden' }}>
@@ -71,20 +72,22 @@ const DataTable = ({ data,setData }) => {
                         {data.length > 0 && data.
                             slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).
                             map((row) => {
-                                const date = new Date(row.release_date)
-                                const year = date.getFullYear()
-                                const month = (date.getMonth() + 1).toString().padStart(2, '0')
-                                const day = date.getDate().toString().padStart(2, '0')
-                                const formatDate = `${year}-${month}-${day}`
+                                const formatDate = dateFormatter({ newDate: row.release_date })
                                 return (
                                     <StyledTableRow key={row.id}>
                                         <StyledTableCell>
-                                            <IconButton >
+                                            <IconButton onClick={() => {
+                                                setSelected(data.filter(r => r.id == row.id)[0])
+                                                setOpen(true)
+                                                setIsAdd(false)
+                                            }} >
                                                 <Edit sx={{ color: '#1c54b2' }} />
                                             </IconButton>
                                         </StyledTableCell>
                                         <StyledTableCell>
-                                            <IconButton >
+                                            <IconButton onClick={() => {
+                                                handleDelete({ id: row.id, setData: setData })
+                                            }}>
                                                 <Delete sx={{ color: '#f50057' }} />
                                             </IconButton>
                                         </StyledTableCell>

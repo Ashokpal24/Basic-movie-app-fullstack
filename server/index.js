@@ -151,7 +151,7 @@ app.post("/api/movie", async (req, res) => {
     collection_amt,
     release_date,
   } = req.body;
-
+  console.log(req.body);
   const movie = new Movie({
     movie_name,
     director_name,
