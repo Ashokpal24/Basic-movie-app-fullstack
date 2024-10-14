@@ -58,7 +58,7 @@ const App = () => {
                     alignItems: 'center',
                     marginBottom: "2rem",
                 }}>
-                <YearPicker handleSetYearIntr={handleSetYearIntr} />
+                <YearPicker handleSetYearIntr={handleSetYearIntr} setData={setData} />
             </Box>
             <Box
                 sx={{
@@ -75,14 +75,9 @@ const App = () => {
                         setSelected(undefined)
                         setIsAdd(true)
                         setOpen(true)
-                    }}><Add /> Add Movie</Button>
-                <PopupFrom
-                    open={open}
-                    setOpen={setOpen}
-                    setData={setData}
-                    isAdd={isAdd}
-                    data={selected}
-                />
+                    }}>
+                    <Add /> Add Movie
+                </Button>
             </Box>
             <DataTable
                 data={data}
@@ -90,6 +85,13 @@ const App = () => {
                 setData={setData}
                 setSelected={setSelected}
                 setIsAdd={setIsAdd}
+            />
+            <PopupFrom
+                open={open}
+                setOpen={setOpen}
+                setData={setData}
+                isAdd={isAdd}
+                data={selected}
             />
         </Box >
     );

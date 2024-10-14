@@ -6,7 +6,7 @@ const handleGetDate = async ({ setData }) => {
   axios
     .get(URL.getMovieURL)
     .then((data) => {
-      setData(data.data);
+      setData(data.data.reverse());
     })
     .catch((err) => console.log(err));
 };
