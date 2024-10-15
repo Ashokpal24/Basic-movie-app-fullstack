@@ -6,8 +6,12 @@ const addMovieURL =
 
 const updateMovieURL =
   "https://bug-free-space-palm-tree-gw7pwwx79jrf9pxq-3000.app.github.dev/api/movie/"; // params - id
+
 const getMoviesByYearURL =
   "https://bug-free-space-palm-tree-gw7pwwx79jrf9pxq-3000.app.github.dev/api/movies_by_year/"; // params - year
+
+const getMovieNameURL =
+  "https://bug-free-space-palm-tree-gw7pwwx79jrf9pxq-3000.app.github.dev/api/multi_name/"; // params - movie|director|studio name
 
 const deleteMovieByIdURL =
   "https://bug-free-space-palm-tree-gw7pwwx79jrf9pxq-3000.app.github.dev/api/movie/"; // params - id
@@ -17,5 +21,6 @@ export {
   addMovieURL,
   updateMovieURL,
   getMoviesByYearURL,
+  getMovieNameURL,
   deleteMovieByIdURL,
 };

@@ -3,7 +3,7 @@ import "./style.css"
 import { useState, useRef, useEffect } from 'react';
 import { Button, Box, IconButton, Typography } from '@mui/material';
 import { Restore, NavigateBefore, NavigateNext } from '@mui/icons-material';
-import { handleGetDate } from '../utils/CRUD';
+import { handleGetData } from '../utils/CRUD';
 import Grid from '@mui/material/Grid2';
 // const yearOptions = [];
 
@@ -57,7 +57,7 @@ export default function YearPicker({ handleSetYearIntr, setData }) {
                     {selectedYear == '' ? "Select date" : selectedYear}
                 </Button>
                 <IconButton onClick={() => {
-                    handleGetDate({ setData: setData })
+                    handleGetData({ setData: setData })
                     setSelectedYear('')
                 }}>
                     <Restore sx={{ color: "red" }} />
@@ -128,7 +128,7 @@ export default function YearPicker({ handleSetYearIntr, setData }) {
     //                 </option>
     //             ))}
     //         </select>
-    //         <IconButton sx={{ width: "48px" }} onClick={() => handleGetDate({ setData })}>
+    //         <IconButton sx={{ width: "48px" }} onClick={() => handleGetData({ setData })}>
     //             <Restore sx={{ color: "red" }} />
     //         </IconButton>
     //     </div >

@@ -2,6 +2,8 @@ import * as React from 'react'
 import { styled, alpha, colors } from '@mui/material'
 import { Search } from '@mui/icons-material'
 import InputBase from '@mui/material/InputBase'
+import { useState } from 'react'
+import { handleGetNameFilterData } from '../utils/CRUD'
 
 const SearchMain = styled('div')(({ theme }) => ({
     position: "relative",
@@ -34,15 +36,28 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }))
 
-
-
-const SearchBar = () => {
+const SearchBar = ({ setData }) => {
+    const [filter, setFilter] = useState("")
     return (
         <SearchMain>
             <SearchIconWrapper>
                 <Search />
             </SearchIconWrapper>
-            <StyledInputBase placeholder='Search' inputProps={{ "aria-label": 'Search' }} />
+            <StyledInputBase
+                value={filter}
+                placeholder='Search by Movie|Director|Studio Name'
+                onChange={(event) => {
+                    setFilter(event.target.value)
+                    console.log(event.target.value)
+                }}
+                onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                        handleGetNameFilterData({ filter, setData })
+                        setFilter('')
+                    }
+
+                }}
+            />
         </SearchMain>
     )
 }

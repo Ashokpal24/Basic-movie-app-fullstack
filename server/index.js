@@ -92,6 +92,29 @@ app.get("/api/studio_name/:studio_name", async (req, res) => {
   }
 });
 
+app.get("/api/multi_name/:name", async (req, res) => {
+  // console.log(req.params);
+  try {
+    const movies = await Movie.find({
+      $or: [
+        { movie_name: { $regex: req.params.name, $options: "i" } },
+        { studio_name: { $regex: req.params.name, $options: "i" } },
+        { director_name: { $regex: req.params.name, $options: "i" } },
+      ],
+    });
+    // console.log(movies);
+    if (movies.length > 0) {
+      res.status(200).json(movies);
+    } else {
+      res.status(200).json({
+        message: `No movie found`,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({ message: "Error occured while getting movies :(" });
+  }
+});
+
 app.get("/api/collection_amt/:amount", async (req, res) => {
   try {
     const movies = await Movie.find({

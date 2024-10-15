@@ -3,7 +3,7 @@ import SearchBar from './components/searchBar';
 import DataTable from './components/dataTable';
 import YearPicker from './components/yearPicker';
 import PopupFrom from './components/popupForm';
-import { handleGetDate, handleSetYear } from './utils/CRUD';
+import { handleGetData, handleSetYear } from './utils/CRUD';
 
 import { Box, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -17,7 +17,7 @@ const App = () => {
     const [isAdd, setIsAdd] = useState(true)
 
     useEffect(() => {
-        handleGetDate({ setData })
+        handleGetData({ setData })
     }, [])
 
     const handleSetYearIntr = ({ year }) => {
@@ -47,9 +47,8 @@ const App = () => {
                     // marginLeft: "1rem",
                     alignSelf: 'flex-start'
                 }} variant="h4" >Movie API 🎞️</Typography>
-                <SearchBar />
             </Box>
-            <Box
+            {/* <Box
                 sx={{
                     width: "70%",
                     display: 'flex',
@@ -58,14 +57,14 @@ const App = () => {
                     alignItems: 'center',
                     marginBottom: "2rem",
                 }}>
-                <YearPicker handleSetYearIntr={handleSetYearIntr} setData={setData} />
-            </Box>
+                
+            </Box> */}
             <Box
                 sx={{
                     width: "70%",
                     display: 'flex',
                     flexDirection: 'row',
-                    justifyContent: 'flex-start',
+                    justifyContent: 'space-between',
                     alignItems: 'center',
                     marginBottom: "2rem",
                 }}>
@@ -78,6 +77,8 @@ const App = () => {
                     }}>
                     <Add /> Add Movie
                 </Button>
+                <YearPicker handleSetYearIntr={handleSetYearIntr} setData={setData} />
+                <SearchBar setData={setData} />
             </Box>
             <DataTable
                 data={data}

@@ -104,9 +104,9 @@ const DataTable = ({ data, setOpen, setData, setSelected, setIsAdd }) => {
             </TableContainer >
             <TablePagination
                 sx={{ backgroundColor: '#1565c0', color: "white" }}
-                rowsPerPageOptions={[2, 5, { value: data.length, label: "All" }]}
+                rowsPerPageOptions={data['message'] != undefined ? [0] : [2, 5, { value: data.length, label: "All" }]}
                 component="div"
-                count={data.length}
+                count={data['message'] != undefined ? 0 : data.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
